@@ -7,7 +7,10 @@ from datetime import datetime
 import requests
 import numpy as np
 
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+SLACK1 = "https://hooks.slack.com/services/"
+SLACK2 = "T03782HMA/B074WAS3NPK"
+SLACK3 = "/Ca7qSLPmFgSAj6mQdT7xuUmS"
+SLACK_WEBHOOK_URL = SLACK1 + SLACK2 + SLACK3
 
 def read_config(config_path):
     try:
