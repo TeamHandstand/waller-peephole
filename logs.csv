@@ -1,0 +1,144 @@
+asset_name,display_time,duration,error
+garage.MOV,2024-05-21 14:22:38,0.0,
+garage.MOV,2024-05-21 14:25:31,13.43884801864624,
+heic-image.HEIC,2024-05-21 14:25:31,0.0,
+kaitlin.jpeg,2024-05-21 14:26:31,60.0,
+garage.MOV,2024-05-21 14:35:50,13.679612159729004,
+Error,2024-05-21 14:35:50,0.0,Unsupported file type: heic-image.HEIC
+heic-image.HEIC,2024-05-21 14:35:50,0.0,
+kaitlin.jpeg,2024-05-21 14:35:52,10.0,
+garage.MOV,2024-05-21 14:36:05,13.50347900390625,
+Error,2024-05-21 14:36:05,0.0,Unsupported file type: heic-image.HEIC
+heic-image.HEIC,2024-05-21 14:36:06,0.0,
+kaitlin.jpeg,2024-05-21 14:36:16,10.0,
+garage.MOV,2024-05-21 14:40:14,13.504547119140623,
+eucalyptus-kitchen-render-1.png,2024-05-21 14:40:24,10.0,
+kaitlin.jpeg,2024-05-21 14:40:34,10.0,
+Error,2024-05-21 14:40:34,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 14:40:34,0.0,
+garage.MOV,2024-05-21 14:40:48,13.3284330368042,
+eucalyptus-kitchen-render-1.png,2024-05-21 14:40:48,10.0,
+kaitlin.jpeg,2024-05-21 14:40:48,10.0,
+Error,2024-05-21 14:40:48,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 14:40:49,0.0,
+garage.MOV,2024-05-21 14:42:36,13.54865837097168,
+eucalyptus-kitchen-render-1.png,2024-05-21 14:42:47,10.0,
+kaitlin.jpeg,2024-05-21 14:42:57,10.0,
+Error,2024-05-21 14:42:57,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 14:42:57,0.0,
+garage.MOV,2024-05-21 14:44:44,13.612705945968628,
+eucalyptus-kitchen-render-1.png,2024-05-21 14:44:54,10.0,
+kaitlin.jpeg,2024-05-21 14:45:04,10.0,
+Error,2024-05-21 14:45:04,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 14:45:04,0.0,
+Error,2024-05-21 14:46:38,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 14:46:38,0.0,
+eucalyptus-kitchen-render-1.png,2024-05-21 14:46:39,1.0,
+kaitlin.jpeg,2024-05-21 14:46:40,1.0,
+Error,2024-05-21 14:46:40,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 14:46:41,0.0,
+Error,2024-05-21 14:46:41,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 14:46:41,0.0,
+eucalyptus-kitchen-render-1.png,2024-05-21 14:46:42,1.0,
+kaitlin.jpeg,2024-05-21 14:46:43,1.0,
+Error,2024-05-21 14:46:43,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 14:46:43,0.0,
+Error,2024-05-21 14:46:43,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 14:46:44,0.0,
+eucalyptus-kitchen-render-1.png,2024-05-21 14:46:45,1.0,
+Error,2024-05-21 15:16:11,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:16:11,0.0,
+Error,2024-05-21 15:16:53,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:16:54,0.0,
+eucalyptus-kitchen-render-1.png,2024-05-21 15:16:57,3.0,
+kaitlin.jpeg,2024-05-21 15:17:00,3.0,
+Error,2024-05-21 15:17:00,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 15:17:00,0.0,
+Error,2024-05-21 15:17:00,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:17:00,0.0,
+eucalyptus-kitchen-render-1.png,2024-05-21 15:17:04,3.0,
+Error,2024-05-21 15:21:52,0.0,Invalid \escape: line 4 column 159 (char 227)
+Error,2024-05-21 15:21:52,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:21:52,0.0,
+Error,2024-05-21 15:22:59,0.0,Invalid \escape: line 4 column 159 (char 227)
+Error,2024-05-21 15:22:59,0.0,[Errno 2] No such file or directory: 'playlist_path'
+Error,2024-05-21 15:23:00,0.0,[Errno 2] No such file or directory: 'logs_path'
+Error,2024-05-21 15:23:01,0.0,[Errno 2] No such file or directory: 'assets_dir'
+Error,2024-05-21 15:23:01,0.0,Invalid file path or buffer object type: <class 'dict'>
+Error,2024-05-21 15:23:30,0.0,Invalid \escape: line 4 column 159 (char 227)
+Error,2024-05-21 15:23:31,0.0,Invalid file path or buffer object type: <class 'NoneType'>
+Error,2024-05-21 15:23:53,0.0,[Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth\\ Shared\\ Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:23:59,0.0,[Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth\\ Shared\\ Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:27:29,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:27:29,0.0,
+Error,2024-05-21 15:27:54,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:27:54,0.0,
+Error,2024-05-21 15:29:03,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:29:05,0.0,
+eucalyptus-kitchen-render-1.png,2024-05-21 15:29:07,2.0,
+kaitlin.jpeg,2024-05-21 15:29:09,2.0,
+Error,2024-05-21 15:29:09,0.0,File not found: some-missignfile.jpg
+some-missignfile.jpg,2024-05-21 15:29:13,0.0,
+Error,2024-05-21 15:29:13,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:29:16,0.0,
+Error,2024-05-21 15:30:43,0.0,Error reading playlist: [Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth Shared Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:31:19,0.0,Error reading playlist: [Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth Shared Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:31:55,0.0,Error reading playlist: [Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth\\ Shared\\ Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:32:39,0.0,Error reading playlist: [Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth/ Shared/ Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:33:16,0.0,Error reading playlist: [Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth\\ Shared\\ Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:35:11,0.0,Error reading playlist: [Errno 2] No such file or directory: '/Users/sammyg/Library/CloudStorage/GoogleDrive-sam@thegoldsteins.com/.shortcut-targets-by-id/1u6eMDp0vuL6_lk1KeHiNlON6XF6c1h9/Phonebooth\\ Shared\\ Drive/sam-playground/peephole/playlist.csv'
+Error,2024-05-21 15:35:43,0.0,File not found: garage.MOV
+garage.MOV,2024-05-21 15:35:44,0.0,
+eucalyptus-kitchen-render-1.png,2024-05-21 15:35:46,2.0,
+Error,2024-05-21 15:36:19,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:19,0.0,
+Error,2024-05-21 15:36:19,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:20,0.0,
+Error,2024-05-21 15:36:20,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:20,0.0,
+Error,2024-05-21 15:36:20,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:20,0.0,
+Error,2024-05-21 15:36:20,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:21,0.0,
+Error,2024-05-21 15:36:21,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:21,0.0,
+Error,2024-05-21 15:36:21,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:21,0.0,
+Error,2024-05-21 15:36:21,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:22,0.0,
+Error,2024-05-21 15:36:22,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:22,0.0,
+Error,2024-05-21 15:36:22,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:23,0.0,
+Error,2024-05-21 15:36:23,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:23,0.0,
+Error,2024-05-21 15:36:23,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:24,0.0,
+Error,2024-05-21 15:36:24,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:24,0.0,
+Error,2024-05-21 15:36:24,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:24,0.0,
+Error,2024-05-21 15:36:24,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:24,0.0,
+Error,2024-05-21 15:36:24,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:25,0.0,
+Error,2024-05-21 15:36:25,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:25,0.0,
+Error,2024-05-21 15:36:25,0.0,File not found: peep.jpg
+peep.jpg,2024-05-21 15:36:26,0.0,
+Error,2024-05-21 15:36:26,0.0,File not found: lasers1.jpg
+lasers1.jpg,2024-05-21 15:36:26,0.0,
+Error,2024-05-21 15:36:26,0.0,File not found: peep.jpg
+lasers1.jpg,2024-05-21 15:36:42,2.0,
+peep.jpg,2024-05-21 15:36:44,2.0,
+lasers1.jpg,2024-05-21 15:36:46,2.0,
+lasers1.jpg,2024-05-21 15:37:21,2.0,
+peep.jpg,2024-05-21 15:37:23,2.0,
+1.mp4,2024-05-21 15:37:37,13.890542268753052,
+lasers1.jpg,2024-05-21 15:37:39,2.0,
+lasers1.jpg,2024-05-21 15:37:53,6.0,
+peep.jpg,2024-05-21 15:37:59,6.0,
+lasers1.jpg,2024-05-21 15:39:58,6.0,
+peep.jpg,2024-05-21 15:40:04,6.0,
+1.mp4,2024-05-21 15:40:18,13.859776973724363,
+lasers1.jpg,2024-05-21 15:40:43,6.0,
