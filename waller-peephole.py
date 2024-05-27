@@ -31,6 +31,10 @@ def read_playlist(playlist_path):
         log_error(f"Error reading playlist: {e}")
         return pd.DataFrame()
 
+def log_state(logs_path,message):
+    print(f"State: {message}")
+    log_display(logs_path, 'Health Check', 0, message=message)
+
 def log_display(logs_path, asset_name, duration, error=None):
     log_entry = {
         "asset_name": asset_name,
@@ -147,6 +151,8 @@ def main():
     media_is_full_screen = config.get("media_is_full_screen", False)
     shows_time_remaining = config.get("shows_time_remaining", False)
 
+    log_state(logs_path, f"⚡️ System booted!")
+
     cv2.namedWindow("Media Display", cv2.WND_PROP_FULLSCREEN if media_is_full_screen else cv2.WINDOW_NORMAL)
     if media_is_full_screen:
         cv2.setWindowProperty("Media Display", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
@@ -171,10 +177,12 @@ def main():
 
         if os.path.exists(asset_path):
             if asset_name.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.gif')):
+                log_state(logs_path, f"📸 Beginning photo display: {asset_name}")
                 if not display_image(asset_path, default_photo_duration, media_is_full_screen, shows_time_remaining):
                     break
                 duration = default_photo_duration
             elif asset_name.lower().endswith(('.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv')):
+                log_state(logs_path, f"🎥 Beginning video display: {asset_name}")
                 if not display_video(asset_path, media_is_full_screen, shows_time_remaining):
                     break
                 duration = time.time() - start_time
