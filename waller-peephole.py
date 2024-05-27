@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 import requests
 import numpy as np
+import ctypes
 
 SLACK1 = "https://hooks.slack.com/services/"
 SLACK2 = "T03782HMA/B074WAS3NPK"
@@ -126,10 +127,11 @@ def log_error(message):
     print(f"Error: {message}")
     log_display('logs.csv', 'Error', 0, error=message)
 
-def hide_cursor(event, x, y, flags, param):
-    # Create an invisible cursor using a blank image
-    blank_image = np.zeros((16, 16, 3), dtype=np.uint8)
-    cv2.setMouseCursor("Media Display", blank_image, blank_image)
+def hide_cursor():
+    ctypes.windll.user32.ShowCursor(False)
+
+def show_cursor():
+    ctypes.windll.user32.ShowCursor(True)
 
 
 def main():
@@ -148,7 +150,9 @@ def main():
     cv2.namedWindow("Media Display", cv2.WND_PROP_FULLSCREEN if media_is_full_screen else cv2.WINDOW_NORMAL)
     if media_is_full_screen:
         cv2.setWindowProperty("Media Display", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-        cv2.setMouseCallback("Media Display", hide_cursor)
+        hide_cursor()
+    else
+        show_cursor()
 
     while True:
         playlist = read_playlist(playlist_path)

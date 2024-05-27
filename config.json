@@ -1,6 +1,6 @@
 {
     "default_photo_duration": 6,
-    "media_is_full_screen": false,
+    "media_is_full_screen": true,
     "playlist_path": "playlist.csv",
     "logs_path": "logs.csv",
     "assets_dir": "assets",
