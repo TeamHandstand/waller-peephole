@@ -31,21 +31,12 @@ def read_playlist(playlist_path):
         log_error(f"Error reading playlist: {e}")
         return pd.DataFrame()
 
-def log_state(message):
-    print(f"State: {message}")
-    log_display(logs_path, 'Health Check', 0, message=message)
-
-def log_error(message):
-    print(f"Error: {message}")
-    log_display(logs_path, 'Error', 0, message=message)
-    send_slack_notification(message)
-
-def log_display(logs_path, asset_name, duration, message=None):
+def log_display(logs_path, asset_name, duration, error=None):
     log_entry = {
         "asset_name": asset_name,
         "display_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "duration": duration,
-        "message": error
+        "error": error
     }
     if os.path.exists(logs_path):
         logs_df = pd.read_csv(logs_path)
@@ -53,6 +44,8 @@ def log_display(logs_path, asset_name, duration, message=None):
     else:
         logs_df = pd.DataFrame([log_entry])
     logs_df.to_csv(logs_path, index=False)
+    if error:
+        send_slack_notification(error)
 
 def send_slack_notification(message):
     payload = {"text": message}
@@ -62,7 +55,6 @@ def send_slack_notification(message):
         print(f"Failed to send Slack notification: {e}")
 
 def display_image(image_path, display_time, full_screen, show_timer):
-    log_state(f"📸 Beginning image display: {image_path}")
     img = cv2.imread(image_path)
     if img is not None:
         screen_res = (1920, 1080)
@@ -93,7 +85,6 @@ def display_image(image_path, display_time, full_screen, show_timer):
     return True
 
 def display_video(video_path, full_screen, show_timer):
-    log_state(f"🎥 Beginning video display: {video_path}")
     cap = cv2.VideoCapture(video_path)
     if cap.isOpened():
         screen_res = (1920, 1080)
@@ -132,6 +123,10 @@ def display_video(video_path, full_screen, show_timer):
         log_error(f"Failed to load video: {video_path}")
     return True
 
+def log_error(message):
+    print(f"Error: {message}")
+    log_display('logs.csv', 'Error', 0, error=message)
+
 def hide_cursor():
     ctypes.windll.user32.ShowCursor(False)
 
@@ -158,8 +153,6 @@ def main():
         hide_cursor()
     else:
         show_cursor()
-
-    log_state("⚡️ System booted!")
 
     while True:
         playlist = read_playlist(playlist_path)
