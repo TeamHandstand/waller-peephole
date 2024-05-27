@@ -126,6 +126,12 @@ def log_error(message):
     print(f"Error: {message}")
     log_display('logs.csv', 'Error', 0, error=message)
 
+def hide_cursor(event, x, y, flags, param):
+    # Create an invisible cursor using a blank image
+    blank_image = np.zeros((16, 16, 3), dtype=np.uint8)
+    cv2.setMouseCursor("Media Display", blank_image, blank_image)
+
+
 def main():
     base_path = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(base_path, 'config.json')
@@ -142,6 +148,7 @@ def main():
     cv2.namedWindow("Media Display", cv2.WND_PROP_FULLSCREEN if media_is_full_screen else cv2.WINDOW_NORMAL)
     if media_is_full_screen:
         cv2.setWindowProperty("Media Display", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        cv2.setMouseCallback("Media Display", hide_cursor)
 
     while True:
         playlist = read_playlist(playlist_path)
