@@ -151,7 +151,7 @@ def main():
     if media_is_full_screen:
         cv2.setWindowProperty("Media Display", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
         hide_cursor()
-    else
+    else:
         show_cursor()
 
     while True:
