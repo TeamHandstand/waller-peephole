@@ -127,11 +127,12 @@ def log_error(message):
     log_display('logs.csv', 'Error', 0, error=message)
 
 def main():
-    config_path = 'config.json'
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(base_path, 'config.json')
     config = read_config(config_path)
-    playlist_path = 'playlist.csv'
-    logs_path = 'logs.csv'
-    assets_dir = 'assets'
+    playlist_path = os.path.join(base_path, 'playlist.csv')
+    logs_path = os.path.join(base_path, 'logs.csv')
+    assets_dir = os.path.join(base_path, 'assets')
     current_index = 0
 
     default_photo_duration = config.get("default_photo_duration", 60)
@@ -153,7 +154,7 @@ def main():
             log_error(f"Playlist key error: {e}")
             break
 
-        asset_path = os.path.join(os.getcwd(), assets_dir, asset_name)
+        asset_path = os.path.join(assets_dir, asset_name)
 
         start_time = time.time()
 
