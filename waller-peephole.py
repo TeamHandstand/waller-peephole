@@ -31,7 +31,7 @@ def read_playlist(playlist_path):
         log_error(f"Error reading playlist: {e}")
         return pd.DataFrame()
 
-def log_state(logs_path, message):
+def log_state(logs_path,message):
     print(f"State: {message}")
     log_display(logs_path, 'Health Check', 0, message=message)
 
@@ -59,58 +59,94 @@ def send_slack_notification(message):
 def display_image(image_path, display_time, full_screen, show_timer):
     img = cv2.imread(image_path)
     if img is not None:
-        screen_res = 1280, 720
+        screen_res = (1920, 1080)
         scale_width = screen_res[0] / img.shape[1]
         scale_height = screen_res[1] / img.shape[0]
         scale = min(scale_width, scale_height)
         window_width = int(img.shape[1] * scale)
         window_height = int(img.shape[0] * scale)
-
-        cv2.namedWindow("Media Display", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Media Display", window_width, window_height)
-
+        img = cv2.resize(img, (window_width, window_height))
+        y_offset = (screen_res[1] - window_height) // 2
+        x_offset = (screen_res[0] - window_width) // 2
+        black_screen = np.zeros((screen_res[1], screen_res[0], 3), dtype=np.uint8)
+        black_screen[y_offset:y_offset + window_height, x_offset:x_offset + window_width] = img
+        
         start_time = time.time()
         while time.time() - start_time < display_time:
-            cv2.imshow("Media Display", img)
+            frame = black_screen.copy()
             if show_timer:
-                elapsed_time = time.time() - start_time
-                remaining_time = display_time - elapsed_time
-                cv2.putText(img, f"Time left: {int(remaining_time)}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+                remaining_time = int(display_time - (time.time() - start_time))
+                timer_text = f"Next in: {remaining_time}s"
+                cv2.putText(frame, timer_text, (screen_res[0] - 200, screen_res[1] - 30), 
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.imshow("Media Display", frame)
+            if cv2.waitKey(1000) & 0xFF == ord('q'):
                 return False
-        return True
     else:
         log_error(f"Failed to load image: {image_path}")
-        return False
+    return True
 
 def display_video(video_path, full_screen, show_timer):
     cap = cv2.VideoCapture(video_path)
-    if not cap.isOpened():
-        log_error(f"Failed to open video: {video_path}")
-        return False
+    if cap.isOpened():
+        screen_res = (1920, 1080)
+        black_screen = np.zeros((screen_res[1], screen_res[0], 3), dtype=np.uint8)
+        
+        # Get the total duration of the video
+        total_duration = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) / cap.get(cv2.CAP_PROP_FPS))
+        
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+            scale_width = screen_res[0] / frame.shape[1]
+            scale_height = screen_res[1] / frame.shape[0]
+            scale = min(scale_width, scale_height)
+            window_width = int(frame.shape[1] * scale)
+            window_height = int(frame.shape[0] * scale)
+            frame = cv2.resize(frame, (window_width, window_height))
+            y_offset = (screen_res[1] - window_height) // 2
+            x_offset = (screen_res[0] - window_width) // 2
+            black_screen.fill(0)
+            black_screen[y_offset:y_offset + window_height, x_offset:x_offset + window_width] = frame
 
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
-        cv2.imshow("Media Display", frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            cap.release()
-            return False
-    cap.release()
+            if show_timer:
+                # Calculate the remaining time
+                current_time = int(cap.get(cv2.CAP_PROP_POS_FRAMES) / cap.get(cv2.CAP_PROP_FPS))
+                remaining_time = total_duration - current_time
+                timer_text = f"Next in: {remaining_time}s"
+                cv2.putText(black_screen, timer_text, (screen_res[0] - 200, screen_res[1] - 30), 
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.imshow("Media Display", black_screen)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                return False
+        cap.release()
+    else:
+        log_error(f"Failed to load video: {video_path}")
     return True
 
 def log_error(message):
     print(f"Error: {message}")
-    send_slack_notification(f"Error: {message}")
+    log_display('logs.csv', 'Error', 0, message=message)
+    send_slack_notification(message)
+
+def hide_cursor():
+    ctypes.windll.user32.ShowCursor(False)
+
+def show_cursor():
+    ctypes.windll.user32.ShowCursor(True)
+
 
 def main():
-    config_path = "config.json"
-    playlist_path = "playlist.csv"
-    logs_path = "logs.csv"
-    assets_dir = "assets"
-    
+    # base_path = os.path.dirname(os.path.abspath(__file__))
+    base_path = "G:\My Drive\Waller Peephole"
+    config_path = os.path.join(base_path, 'config.json')
     config = read_config(config_path)
+    playlist_path = os.path.join(base_path, 'playlist.csv')
+    logs_path = os.path.join(base_path, 'logs.csv')
+    assets_dir = os.path.join(base_path, 'assets')
+    current_index = 0
+
     default_photo_duration = config.get("default_photo_duration", 60)
     media_is_full_screen = config.get("media_is_full_screen", False)
     shows_time_remaining = config.get("shows_time_remaining", False)
@@ -124,41 +160,41 @@ def main():
     else:
         show_cursor()
 
-    current_index = 0
-
     while True:
+        playlist = read_playlist(playlist_path)
+        if playlist.empty or current_index >= len(playlist):
+            current_index = 0
+
         try:
-            playlist = read_playlist(playlist_path)
-            if playlist.empty or current_index >= len(playlist):
-                current_index = 0
-
             asset_name = playlist.iloc[current_index]['filename']
-            asset_path = os.path.join(assets_dir, asset_name)
+        except KeyError as e:
+            log_error(f"Playlist key error: {e}")
+            break
 
-            start_time = time.time()
+        asset_path = os.path.join(assets_dir, asset_name)
 
-            if os.path.exists(asset_path):
-                if asset_name.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.gif')):
-                    log_state(logs_path, f"📸 Beginning photo display: {asset_name}")
-                    if not display_image(asset_path, default_photo_duration, media_is_full_screen, shows_time_remaining):
-                        break
-                    duration = default_photo_duration
-                elif asset_name.lower().endswith(('.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv')):
-                    log_state(logs_path, f"🎥 Beginning video display: {asset_name}")
-                    if not display_video(asset_path, media_is_full_screen, shows_time_remaining):
-                        break
-                    duration = time.time() - start_time
-                else:
-                    log_error(f"Unsupported file type: {asset_name}")
-                    duration = 0
+        start_time = time.time()
+
+        if os.path.exists(asset_path):
+            if asset_name.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.gif')):
+                log_state(logs_path, f"📸 Beginning photo display: {asset_name}")
+                if not display_image(asset_path, default_photo_duration, media_is_full_screen, shows_time_remaining):
+                    break
+                duration = default_photo_duration
+            elif asset_name.lower().endswith(('.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv')):
+                log_state(logs_path, f"🎥 Beginning video display: {asset_name}")
+                if not display_video(asset_path, media_is_full_screen, shows_time_remaining):
+                    break
+                duration = time.time() - start_time
             else:
-                log_error(f"File not found: {asset_name}")
+                log_error(f"Unsupported file type: {asset_name}")
                 duration = 0
+        else:
+            log_error(f"File not found: {asset_name}")
+            duration = 0
 
-            log_display(logs_path, asset_name, duration)
-            current_index += 1
-        except Exception as e:
-            log_error(f"Unexpected error in main loop: {e}")
+        log_display(logs_path, asset_name, duration)
+        current_index += 1
 
     cv2.destroyAllWindows()
 
