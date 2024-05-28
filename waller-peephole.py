@@ -35,12 +35,12 @@ def log_state(logs_path,message):
     print(f"State: {message}")
     log_display(logs_path, 'Health Check', 0, message=message)
 
-def log_display(logs_path, asset_name, duration, error=None):
+def log_display(logs_path, asset_name, duration, message=None):
     log_entry = {
         "asset_name": asset_name,
         "display_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "duration": duration,
-        "error": error
+        "message": message
     }
     if os.path.exists(logs_path):
         logs_df = pd.read_csv(logs_path)
@@ -48,8 +48,6 @@ def log_display(logs_path, asset_name, duration, error=None):
     else:
         logs_df = pd.DataFrame([log_entry])
     logs_df.to_csv(logs_path, index=False)
-    if error:
-        send_slack_notification(error)
 
 def send_slack_notification(message):
     payload = {"text": message}
@@ -129,7 +127,8 @@ def display_video(video_path, full_screen, show_timer):
 
 def log_error(message):
     print(f"Error: {message}")
-    log_display('logs.csv', 'Error', 0, error=message)
+    log_display('logs.csv', 'Error', 0, message=message)
+    send_slack_notification(message)
 
 def hide_cursor():
     ctypes.windll.user32.ShowCursor(False)
@@ -139,7 +138,8 @@ def show_cursor():
 
 
 def main():
-    base_path = os.path.dirname(os.path.abspath(__file__))
+    # base_path = os.path.dirname(os.path.abspath(__file__))
+    base_path = "G:\My Drive\Waller Peephole"
     config_path = os.path.join(base_path, 'config.json')
     config = read_config(config_path)
     playlist_path = os.path.join(base_path, 'playlist.csv')
