@@ -105,10 +105,24 @@ def log_error(message):
     send_slack_notification(f"Error: {message}")
 
 def main():
-    config_path = "config.json"
-    playlist_path = "playlist.csv"
-    logs_path = "logs.csv"
-    assets_dir = "assets"
+
+
+    base_path = "G:\My Drive\Waller Peephole"
+    config_path = os.path.join(base_path, 'config.json')
+    
+    config = read_config(config_path)
+    playlist_path = os.path.join(base_path, 'playlist.csv')
+    logs_path = os.path.join(base_path, 'logs.csv')
+    assets_dir = os.path.join(base_path, 'assets')
+    current_index = 0
+
+
+
+
+    # config_path = "config.json"
+    # playlist_path = "playlist.csv"
+    # logs_path = "logs.csv"
+    # assets_dir = "assets"
     
     config = read_config(config_path)
     default_photo_duration = config.get("default_photo_duration", 60)
