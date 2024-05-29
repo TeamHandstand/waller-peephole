@@ -147,15 +147,22 @@ def display_image(asset_path, duration, full_screen, show_timer):
     global overlay_message, overlay_duration, overlay_start_time
     img = cv2.imread(asset_path)
     start_time = time.time()
+
+    # Set up full-screen display
+    cv2.namedWindow('Media Display', cv2.WND_PROP_FULLSCREEN)
+    if full_screen:
+        cv2.setWindowProperty('Media Display', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
     while True:
         elapsed_time = time.time() - start_time
         if elapsed_time > duration:
             break
         if overlay_message and time.time() - overlay_start_time < overlay_duration:
             img = show_overlay(img, overlay_message)
-        cv2.imshow('Display', img)
+        cv2.imshow('Media Display', img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             return False
+
     return True
 
 # def display_image(image_path, display_time, full_screen, show_timer):
@@ -191,17 +198,24 @@ def display_image(asset_path, duration, full_screen, show_timer):
 def display_video(asset_path, full_screen, show_timer):
     global overlay_message, overlay_duration, overlay_start_time
     cap = cv2.VideoCapture(asset_path)
-    while(cap.isOpened()):
+
+    # Set up full-screen display
+    cv2.namedWindow('Media Display', cv2.WND_PROP_FULLSCREEN)
+    if full_screen:
+        cv2.setWindowProperty('Media Display', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
+    while cap.isOpened():
         ret, frame = cap.read()
         if ret:
             if overlay_message and time.time() - overlay_start_time < overlay_duration:
                 frame = show_overlay(frame, overlay_message)
-            cv2.imshow('Display', frame)
+            cv2.imshow('Media Display', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 cap.release()
                 return False
         else:
             break
+
     cap.release()
     return True
 
@@ -308,23 +322,19 @@ def main():
                 log_state(logs_path, f"📸 Beginning photo display: {asset_name}")
                 if not display_image(asset_path, default_photo_duration, media_is_full_screen, shows_time_remaining):
                     break
-                duration = default_photo_duration
             elif asset_name.lower().endswith(('.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv')):
                 log_state(logs_path, f"🎥 Beginning video display: {asset_name}")
                 if not display_video(asset_path, media_is_full_screen, shows_time_remaining):
                     break
-                duration = time.time() - start_time
             else:
                 log_error(f"Unsupported file type: {asset_name}")
-                duration = 0
         else:
             log_error(f"File not found: {asset_name}")
-            duration = 0
 
-        log_display(logs_path, asset_name, duration)
         current_index += 1
 
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()
+    cv2.destroyAllWindows()
