@@ -55,7 +55,7 @@ def log_display(logs_path, asset_name, duration, message=None):
     
     log_exists = os.path.exists(logs_path)
     
-    with open(logs_path, mode='a', newline='') as file:
+    with open(logs_path, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=log_entry.keys())
         if not log_exists:
             writer.writeheader()
