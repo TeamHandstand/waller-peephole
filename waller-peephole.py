@@ -160,6 +160,12 @@ def main():
     else:
         show_cursor()
 
+    playlist = read_playlist(playlist_path)
+    if not playlist.empty:
+        asset_friendly_name = playlist.iloc[0]['title']
+    else:
+        asset_friendly_name = "No assets"
+
     while True:
         playlist = read_playlist(playlist_path)
         if playlist.empty or current_index >= len(playlist):
@@ -167,6 +173,7 @@ def main():
 
         try:
             asset_name = playlist.iloc[current_index]['filename']
+            asset_friendly_name = playlist.iloc[current_index]['title']
         except KeyError as e:
             log_error(f"Playlist key error: {e}")
             break
