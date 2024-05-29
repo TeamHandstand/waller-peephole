@@ -44,12 +44,22 @@ def log_display(logs_path, asset_name, duration, message=None):
         "duration": duration,
         "message": message
     }
-    if os.path.exists(logs_path):
-        logs_df = pd.read_csv(logs_path)
-        logs_df = pd.concat([logs_df, pd.DataFrame([log_entry])], ignore_index=True)
-    else:
-        logs_df = pd.DataFrame([log_entry])
-    logs_df.to_csv(logs_path, index=False)
+
+    # if os.path.exists(logs_path):
+    #     logs_df = pd.read_csv(logs_path)
+    #     logs_df = pd.concat([logs_df, pd.DataFrame([log_entry])], ignore_index=True)
+    # else:
+    #     logs_df = pd.DataFrame([log_entry])
+    # logs_df.to_csv(logs_path, index=False)
+
+    
+    log_exists = os.path.exists(logs_path)
+    
+    with open(logs_path, mode='a', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=log_entry.keys())
+        if not log_exists:
+            writer.writeheader()
+        writer.writerow(log_entry)
 
 def log_health_check(log_file_path, active_name):
     log_display(log_file_path, asset_name="Health Check", duration=0, message=f"💗 Alive and well. Currently showing: {active_name}")
