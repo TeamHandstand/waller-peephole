@@ -172,6 +172,8 @@ def main():
     else:
         asset_friendly_name = "No assets"
 
+    log_health_check(logs_path, asset_friendly_name)
+
     while True:
         playlist = read_playlist(playlist_path)
         if playlist.empty or current_index >= len(playlist):
