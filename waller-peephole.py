@@ -62,7 +62,7 @@ def log_display(logs_path, asset_name, duration, message=None):
         writer.writerow(log_entry)
 
 def log_health_check(log_file_path, active_name):
-    log_display(log_file_path, asset_name="Health Check", duration=0, message=f"💗 Alive and well. Currently showing: {active_name}")
+    log_display(log_file_path, asset_name="Health Check", duration=0, message=f"<3 Alive and well. Currently showing: {active_name}")
     threading.Timer(3, log_health_check, args=(log_file_path, active_name)).start()
 
 def send_slack_notification(message):
