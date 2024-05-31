@@ -319,11 +319,11 @@ def main():
 
         if os.path.exists(asset_path):
             if asset_name.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.gif')):
-                log_state(logs_path, f"📸 Beginning photo display: {asset_name}")
+                log_state(logs_path, f"📸 Beginning photo display: {asset_friendly_name}")
                 if not display_image(asset_path, default_photo_duration, media_is_full_screen, shows_time_remaining):
                     break
             elif asset_name.lower().endswith(('.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv')):
-                log_state(logs_path, f"🎥 Beginning video display: {asset_name}")
+                log_state(logs_path, f"🎥 Beginning video display: {asset_friendly_name}")
                 if not display_video(asset_path, media_is_full_screen, shows_time_remaining):
                     break
             else:
